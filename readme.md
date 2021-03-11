@@ -1,4 +1,4 @@
-# 타입스크립트 배우기
+# Learn TS
 
 ## TS 설명
 
@@ -12,6 +12,14 @@ npm i typescript
 npm i -g typescript
 tsc lecture.ts -w
 ```
+- 글로벌로 설치해서 실행
+- 이렇게 할 경우 나중에 TS 버전이 달라질 경우 문제가 될 수 있다.
+
+```command
+npx tsc lecture.ts -w
+```
+- npx로 실행
+- 프로젝트 버전과 명령어 버전을 일치시킬 수 있다.
 
 - 나중에 확장성을 고려해서 복잡하게 될 것 같을 때 TS를 도입하는 것이 좋다.
 - 간단한 것은 TS를 도입할 필요 없다.
@@ -31,6 +39,6 @@ tsc lecture.ts -w
   - 세세한 내용을 readme에 작성
   - 코드에 상세 주석
 
-## 듣던 강좌
+## 강좌
 
 - 타입스크립트 강좌 1-7
