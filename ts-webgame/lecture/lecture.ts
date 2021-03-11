@@ -1,6 +1,7 @@
-const abcd: number = 1;
-console.log('hello javascript');
-console.log('hello typescript');
+enum Color { Red, Green, Blue }
+let c: Color = Color.Green;
 
-const input: HTMLInputElement = document.createElement('input');
-const button: HTMLButtonElement = document.createElement('button');
+Color[0] === 'Red';
+Color['Red'] === 0;
+Color[1] === 'Green';
+Color['Green'] === 1;
