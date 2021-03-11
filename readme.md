@@ -25,6 +25,9 @@ npx tsc lecture.ts -w
 - 간단한 것은 TS를 도입할 필요 없다.
 - TS는 가독성이 안 좋다.
 
+## 참고 주소
+- [TS Compiler Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html#compiler-options)
+
 ## ZeroCho 저장소
 
 - [ts-lecture](https://github.com/ZeroCho/ts-lecture)
@@ -41,4 +44,4 @@ npx tsc lecture.ts -w
 
 ## 강좌
 
-- 타입스크립트 강좌 1-7
+- 타입스크립트 강좌 2-1 07:30
