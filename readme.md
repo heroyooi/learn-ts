@@ -70,6 +70,13 @@ const obj: { a: string, b: number } = { a: 'b', b: 3 };
 // b가 있을 수도 없을 수도 있는 경우
 const obj: { a: string, b?: number } = { a: 'b' };
 // 나중에 타입 부분을 interface로 빼게 된다.
+
+// 복잡한 경우
+const obj2: { a: (b: number) => string } = {
+  a(b: number) {
+    return 'hello'
+  }
+}
 ```
 
 - enum 타입
@@ -81,6 +88,83 @@ Color[0] === 'Red';
 Color['Red'] === 0;
 Color[1] === 'Green';
 Color['Green'] === 1;
+```
+
+- 함수 타입
+```TS
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+// 리턴 없는 함수
+function add(a: number, b: number): void { // void는 생략 가능
+  console.log(a, b);
+}
+
+// 고차 함수
+function add(a: number, b: number): (c: string) => number { // 함수 자체를 타입으로 사용
+  return (c: string) => {
+    return 3;
+  }
+}
+
+// 고차 함수, 더 복잡한 경우
+function add(a: number, b: number): (c: string) => (d: string) => boolean {
+  return (c: string) => {
+    return (d: string) => {
+      return false;
+    }
+  }
+}
+```
+
+## 오버 로딩
+
+```TS
+const obj: { a: (b: number, c?: string) => string } = {
+  a(b: number, c?: string) {
+    return 'hello'
+  }
+}
+
+obj.a() // X, 매개 변수 b가 없기 때문에 에러가 난다.
+obj.a(3) // O
+obj.a(3, 'hello') // O
+```
+- 오버로딩 관계를 명확하게 표시해야한다.
+
+## never any
+
+```TS
+const arr: [] = [];
+arr.push(3); // X, never 타입이기 때문에 에러가 난다.
+```
+- 거의 대부분의 경우 배열을 잘못 만든 경우 never라는 에러가 난다.
+
+```TS
+const hi: any = [];
+```
+- any는 아무거나 들어간다.
+- TS를 도입하는 사람은 any를 쓰면 의미가 없어진다.
+- 남이 만들어둔 d.ts 파일에서 타입을 잘못 만든 경우, any를 사용할 때가 있다.
+
+## 타입 캐스팅
+
+```TS
+const hello: number = 3; // 남이 타입을 잘못 선언한 경우
+
+(hello as unknown as string).substr(1, 2); // 타입 캐스팅1, 강제로 hello의 타입을 string으로 바꾸어서 사용한다.
+(<string><unknown>hello).substr(1, 2); // 타입 캐스팅2
+```
+
+```TS
+const div: HTMLDivElement = document.createElement('div');
+const a = div as HTMLElement
+```
+- unknown을 붙이지 않아도 된다.
+- 이유는 d.ts 파일에 아래와 같이 관계가 정의 되어있기 때문
+```TS (lib.dom.d.ts)
+interface HTMLDivElement extends HTMLElement {} // 상속 관계
 ```
 
 ## 참고 주소
@@ -102,4 +186,4 @@ Color['Green'] === 1;
 
 ## 강좌
 
-- 타입스크립트 강좌 2-4 08:50
+- 타입스크립트 강좌 2-6 03:30
