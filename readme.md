@@ -35,6 +35,9 @@ npx tsc lecture.ts -w
     - types, typeRoots: 내가 만든 커스텀 d.ts 경로를 지정해준다.
     - strict: 엄격하게 체크하기 위해서 true로 하는 것이 좋다.
     - module: IE를 지원할 경우 CommonJS
+    - allowJs: JS 파일 컴파일
+    - checkJs: JS 에러도 체크
+
   - include: 어떤 파일들을 컴파일 할 것인지 설정
   - exclude: 어떤 파일들을 컴파일 목록에서 제외할 것인지를 설정
   - extends: 여러개 프로젝트가 있는 경우 사용
@@ -167,8 +170,35 @@ const a = div as HTMLElement
 interface HTMLDivElement extends HTMLElement {} // 상속 관계
 ```
 
+- 남이 만든 것은 타입 추론을 쓰고, 내가 만든 변수엔 타입을 쓴다.
+  - 남이 만든 것은 패키지 업데이트 할 때 바뀔 수가 있기 때문에
+```TS
+const result: HTMLHeadingElement = document.createElement('h1');
+```
+  - 미래에 남이 만든 HTMLHeadingElement 타입이 바뀔 수도 있으니깐
+
+## 인터페이스, 타입 alias
+
+```TS
+interface hello {
+  a: string;
+  b?: number;
+}
+interface helloChild extends hello {
+  c?: boolean;
+}
+
+type hello2 = {
+  a: string;
+  b?: number;
+}
+type stringOfNumber = string | number;
+```
+
 ## 참고 주소
 - [TS Compiler Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html#compiler-options)
+- [DefinitelyTyped | lodash](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/lodash)
+- [DefinitelyTyped | jQuery](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/jquery)
 
 ## ZeroCho 저장소
 
@@ -186,4 +216,4 @@ interface HTMLDivElement extends HTMLElement {} // 상속 관계
 
 ## 강좌
 
-- 타입스크립트 강좌 2-6 03:30
+- 타입스크립트 강좌 3-1
