@@ -177,23 +177,77 @@ const result: HTMLHeadingElement = document.createElement('h1');
 ```
   - 미래에 남이 만든 HTMLHeadingElement 타입이 바뀔 수도 있으니깐
 
-## 인터페이스, 타입 alias
+## interface, type aliases
+
+### interface
+```TS
+interface RSP {
+  readonly ROCK: '0';
+  readonly SCISSORS: '-142px';
+  readonly PAPER: '-284px';
+}
+interface Example extends RSP {}
+const rsp: Example = { // 상속 받아서 사용
+  ROCK: '0';
+  SCISSORS: '-142px';
+  PAPER: '-284px';
+}
+function computerChoice(imgCoords): keyof RSP { // 'ROCK' | 'SCISSORS' | 'PAPER'
+  return Object.keys(rsp).find((k) => rsp[k] === imgCoords);
+}
+```
+- 상속 받는 것이 가능하다.
+- keyof 인터페이스: 키들만 뽑아서 정의할 수도 있다.
 
 ```TS
-interface hello {
-  a: string;
-  b?: number;
-}
-interface helloChild extends hello {
-  c?: boolean;
+interface Example {
+  a: 3,
+  b: 7,
+  [key: string]: number;
 }
 
-type hello2 = {
-  a: string;
-  b?: number;
+const example: Example = {
+  a: 3,
+  b: 7,
+  c: 1,
 }
-type stringOfNumber = string | number;
 ```
+- 무엇이 들어올 지 모르는 경우
+
+```TS
+interface RSP {
+  readonly ROCK: '0';
+}
+interface RSP {
+  readonly SCISSORS: '-142px';
+  readonly PAPER: '-284px';
+}
+```
+- 이렇게 2번 선언하면 RSP 2가지 내용이 합쳐진다.
+
+### type aliases
+
+```TS
+type Hello = {
+  ROCK: string;
+  PAPER: string;
+} | string;
+type Hello2 = string | number
+
+const hi: Hello = {
+  ROCK: 'a',
+  PAPER: 'b',
+};
+```
+- 타입은 2번 선언할 수 없다. 다양하게 정의할 수 있다.
+
+### interface VS type aliases
+
+- 타입이 좀 더 넓은 범위
+  - 인터페이스는 주로 객체, 타입은 좀 더 다재다능한 개념
+  - 타입은 새로운 타입을 만들어 낼 수 있다.
+
+- 객체는 인터페이스로만 쓰겠다고 정하는 것이 좋다.
 
 ## 참고 주소
 - [TS Compiler Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html#compiler-options)
@@ -216,4 +270,4 @@ type stringOfNumber = string | number;
 
 ## 강좌
 
-- 타입스크립트 강좌 3-1
+- 타입스크립트 강좌 3-2
