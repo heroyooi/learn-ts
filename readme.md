@@ -6,18 +6,21 @@
 - TS는 JS의 변수, 함수의 매개변수, 함수의 리턴 값에 타입이 명시적으로 붙은 것이다.
 
 - 간단한 TS 설치 및 JS 파일 변환
+
 ```command
 npm init
 npm i typescript
 npm i -g typescript
 tsc lecture.ts -w
 ```
+
 - 글로벌로 설치해서 실행
 - 이렇게 할 경우 나중에 TS 버전이 달라질 경우 문제가 될 수 있다.
 
 ```command
 npx tsc lecture.ts -w
 ```
+
 - npx로 실행
 - 프로젝트 버전과 명령어 버전을 일치시킬 수 있다.
 
@@ -28,7 +31,9 @@ npx tsc lecture.ts -w
 ## TS 설정
 
 - tsconfig.json 파일 생성 후 아래 옵션들 정의
+
   - compilerOptions
+
     - outDir: 컴파일된 JS파일을 다른 폴더에 옮기고 싶을 경우
     - target: 중요! 기본적으로 ES3로 되어있음. IE11까지면 ES5로 설정하면 된다.
       - ES6로 하면 IE에서 안 돌아감. 그 때는 바벨로 추가적으로 컴파일한다.
@@ -46,12 +51,14 @@ npx tsc lecture.ts -w
 
 - 배열 타입
   - 기본 표기법 2가지
+
 ```TS
 let arr: number[] = [1, 2, 3]
 let arr: Array<number> = [1, 2, 3]
 ```
 
-  - 여러가지 타입으로 들어가는 경우
+- 여러가지 타입으로 들어가는 경우
+
 ```TS
 
 let arr: (string | number | boolean)[] = [true, 2, '3'];
@@ -67,6 +74,7 @@ let arr = [true, 2, '3'] as const;
 ```
 
 - 객체 타입
+
 ```TS
 const obj: { a: string, b: number } = { a: 'b', b: 3 };
 
@@ -83,6 +91,7 @@ const obj2: { a: (b: number) => string } = {
 ```
 
 - enum 타입
+
 ```TS
 enum Color { Red, Green, Blue }
 let c: Color = Color.Green;
@@ -94,6 +103,7 @@ Color['Green'] === 1;
 ```
 
 - 함수 타입
+
 ```TS
 function add(a: number, b: number): number {
   return a + b;
@@ -134,6 +144,7 @@ obj.a() // X, 매개 변수 b가 없기 때문에 에러가 난다.
 obj.a(3) // O
 obj.a(3, 'hello') // O
 ```
+
 - 오버로딩 관계를 명확하게 표시해야한다.
 
 ## never any
@@ -142,11 +153,13 @@ obj.a(3, 'hello') // O
 const arr: [] = [];
 arr.push(3); // X, never 타입이기 때문에 에러가 난다.
 ```
+
 - 거의 대부분의 경우 배열을 잘못 만든 경우 never라는 에러가 난다.
 
 ```TS
 const hi: any = [];
 ```
+
 - any는 아무거나 들어간다.
 - TS를 도입하는 사람은 any를 쓰면 의미가 없어진다.
 - 남이 만들어둔 d.ts 파일에서 타입을 잘못 만든 경우, any를 사용할 때가 있다.
@@ -164,22 +177,27 @@ const hello: number = 3; // 남이 타입을 잘못 선언한 경우
 const div: HTMLDivElement = document.createElement('div');
 const a = div as HTMLElement
 ```
+
 - unknown을 붙이지 않아도 된다.
 - 이유는 d.ts 파일에 아래와 같이 관계가 정의 되어있기 때문
+
 ```TS (lib.dom.d.ts)
 interface HTMLDivElement extends HTMLElement {} // 상속 관계
 ```
 
 - 남이 만든 것은 타입 추론을 쓰고, 내가 만든 변수엔 타입을 쓴다.
   - 남이 만든 것은 패키지 업데이트 할 때 바뀔 수가 있기 때문에
+
 ```TS
 const result: HTMLHeadingElement = document.createElement('h1');
 ```
-  - 미래에 남이 만든 HTMLHeadingElement 타입이 바뀔 수도 있으니깐
+
+- 미래에 남이 만든 HTMLHeadingElement 타입이 바뀔 수도 있으니깐
 
 ## interface, type aliases
 
 ### interface
+
 ```TS
 interface RSP {
   readonly ROCK: '0';
@@ -196,6 +214,7 @@ function computerChoice(imgCoords): keyof RSP { // 'ROCK' | 'SCISSORS' | 'PAPER'
   return Object.keys(rsp).find((k) => rsp[k] === imgCoords);
 }
 ```
+
 - 상속 받는 것이 가능하다.
 - keyof 인터페이스: 키들만 뽑아서 정의할 수도 있다.
 
@@ -212,6 +231,7 @@ const example: Example = {
   c: 1,
 }
 ```
+
 - 무엇이 들어올 지 모르는 경우
 
 ```TS
@@ -223,6 +243,7 @@ interface RSP {
   readonly PAPER: '-284px';
 }
 ```
+
 - 이렇게 2번 선언하면 RSP 2가지 내용이 합쳐진다.
 
 ### type aliases
@@ -239,17 +260,20 @@ const hi: Hello = {
   PAPER: 'b',
 };
 ```
+
 - 타입은 2번 선언할 수 없다. 다양하게 정의할 수 있다.
 
 ### interface VS type aliases
 
 - 타입이 좀 더 넓은 범위
+
   - 인터페이스는 주로 객체, 타입은 좀 더 다재다능한 개념
   - 타입은 새로운 타입을 만들어 낼 수 있다.
 
 - 객체는 인터페이스로만 쓰겠다고 정하는 것이 좋다.
 
 ## 참고 주소
+
 - [TS Compiler Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html#compiler-options)
 - [DefinitelyTyped | lodash](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/lodash)
 - [DefinitelyTyped | jQuery](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/jquery)

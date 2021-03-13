@@ -16,14 +16,10 @@ npx webpack
   - awesome-typescript-loader
     - 타입스크립트와 바벨을 연결해서 사용하는 경우가 있다.
 
-```command
-npm i react-hot-loader
-```
-
 ## 참고
 
 [DefinitelyTyped | React](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts)
 
 ## 강좌
 
-1-5
+2-1
