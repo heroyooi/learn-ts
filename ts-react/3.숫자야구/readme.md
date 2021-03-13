@@ -26,4 +26,4 @@ npm i react-hot-loader
 
 ## 강좌
 
-2-3
+2-1
