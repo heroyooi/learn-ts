@@ -18,7 +18,7 @@ tsc lecture.ts -w
 - 이렇게 할 경우 나중에 TS 버전이 달라질 경우 문제가 될 수 있다.
 
 ```command
-npx tsc lecture.ts -w
+npx tsc -w
 ```
 
 - npx로 실행
@@ -204,7 +204,7 @@ interface RSP {
   readonly SCISSORS: '-142px';
   readonly PAPER: '-284px';
 }
-interface Example extends RSP {}
+interface Example extends RSP {} // 확장 가능
 const rsp: Example = { // 상속 받아서 사용
   ROCK: '0';
   SCISSORS: '-142px';
@@ -232,7 +232,7 @@ const example: Example = {
 }
 ```
 
-- 무엇이 들어올 지 모르는 경우
+- 무엇이 들어올 지 모르는 경우 [key: string] 로 여유를 둘 수 있다.
 
 ```TS
 interface RSP {
@@ -277,6 +277,7 @@ const hi: Hello = {
 ```TS
 return (Object.keys(rsp) as ['ROCK', 'SCISSORS', 'PAPER']).find((k) => rsp[k] === imgCoords)!;
 ```
+
 - find의 d.ts 파일을 보면 undefined의 가능성을 갖고 있기 때문에 !로 프로그래머가 보증을 해준다.
 
 ```TS
@@ -284,7 +285,31 @@ btn.addEventListener('click', function(this: HTMLButtonElement, e: Event) {
   const myChoice = this.textContent as keyof RSP;
 });
 ```
+
 - 함수 내부에서 this를 사용하는 경우 첫번째 매개변수를 this로 타입과 함께 정의해줘야한다.
+
+## strictNullChecks
+
+- null과 undefined를 구분해야하는 경우가 있고, 안해야하는 경우가 있다.
+
+- strictNullChecks: false인 경우 구분을 안한다.
+
+```TS
+interface Player {
+  heroData?: Card // Card | null | undefined 다 허용
+  chosenCard?: HTMLDivElement // ?는 HTMLDivElement | undefined과 동일
+}
+```
+
+- strictNullChecks: true인 경우 구분을 한다.
+  - strict를 true로 하면 자동으로 true로 설정된다.
+
+```TS
+interface Player {
+  heroData: Card | null
+  chosenCard?: HTMLDivElement | null
+}
+```
 
 ## 참고 주소
 
@@ -303,9 +328,12 @@ btn.addEventListener('click', function(this: HTMLButtonElement, e: Event) {
 - learn-ts (webgame, react, nodebird)
 - learn-react (nodebird, slack)
 - learn-vue (nodebird)
+
   - 세세한 내용을 readme에 작성
   - 코드에 상세 주석
 
+- 기억력에 한계 때문에, 계속해서 복습 해야할 것 같다.
+
 ## 강좌
 
-- 타입스크립트 강좌 3-5
+- 타입스크립트 강좌 4-2

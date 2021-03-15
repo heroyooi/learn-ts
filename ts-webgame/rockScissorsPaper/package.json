@@ -1,0 +1,9 @@
+{
+  "name": "lecture",
+  "version": "1.0.0",
+  "author": "Heroyooi",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^4.2.3"
+  }
+}
