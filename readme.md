@@ -272,6 +272,20 @@ const hi: Hello = {
 
 - 객체는 인터페이스로만 쓰겠다고 정하는 것이 좋다.
 
+## d.ts 문제 해결하기
+
+```TS
+return (Object.keys(rsp) as ['ROCK', 'SCISSORS', 'PAPER']).find((k) => rsp[k] === imgCoords)!;
+```
+- find의 d.ts 파일을 보면 undefined의 가능성을 갖고 있기 때문에 !로 프로그래머가 보증을 해준다.
+
+```TS
+btn.addEventListener('click', function(this: HTMLButtonElement, e: Event) {
+  const myChoice = this.textContent as keyof RSP;
+});
+```
+- 함수 내부에서 this를 사용하는 경우 첫번째 매개변수를 this로 타입과 함께 정의해줘야한다.
+
 ## 참고 주소
 
 - [TS Compiler Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html#compiler-options)
@@ -294,4 +308,4 @@ const hi: Hello = {
 
 ## 강좌
 
-- 타입스크립트 강좌 3-2
+- 타입스크립트 강좌 3-5
