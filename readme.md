@@ -246,6 +246,19 @@ interface RSP {
 
 - 이렇게 2번 선언하면 RSP 2가지 내용이 합쳐진다.
 
+```TS
+interface Example {
+  add: (a: number, b: number) => number
+}
+const ex: Example = {
+  add: (a, b) => {
+    return a + b;
+  }
+}
+```
+
+- 객체 안에서 함수를 가질 경우
+
 ### type aliases
 
 ```TS
@@ -311,6 +324,66 @@ interface Player {
 }
 ```
 
+## Class 타이핑
+
+```TS
+class Card {
+  public att: number;
+  protected hp: number;
+  private cost: number;
+}
+```
+
+- private: 내 클래스 안에서만 접근 가능
+- protected: 내 클래스, 나를 상속받은 자식들만 접근 가능
+- public: 내 클래스, 나를 상속받은 장식, 내 인스턴스에서도 접근 가능
+
+```TS
+interface ICard {
+  att?: number;
+  hp?: number;
+}
+
+class Card implements ICard {
+  public att?: number;
+  public hp?: number;
+}
+```
+
+- class가 지켜야하는 것을 implements로 표현할 수 있다.
+
+## 제네릭
+
+- 한단어로 표현하자면 짝맞추기
+
+```TS
+interface obj<T> {
+  add: (a: T, b: T) => T;
+}
+const a: obj<number> = {
+  add: (a, b) => a + b,
+};
+const b: obj<string> = {
+  add: (a, b) => a + b,
+}
+a.add(1, 2)
+b.add('a', 'b');
+```
+
+- T 선언은 여유롭게, 실제로 interface를 사용할 때 T를 정의
+
+```TS
+function forEach<T>(arr: T[], callback: (item: T) => void): void {
+  for (let i: number = 0; i < arr.length; i++) {
+    callback(arr[i]);
+  }
+}
+
+forEach<number>([1, 2, 3], (item) => {});
+```
+
+- 제네릭 개념을 사용하여 forEach 함수를 만듦
+
 ## 참고 주소
 
 - [TS Compiler Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html#compiler-options)
@@ -336,4 +409,4 @@ interface Player {
 
 ## 강좌
 
-- 타입스크립트 강좌 4-2
+- 타입스크립트 강좌 4-5
