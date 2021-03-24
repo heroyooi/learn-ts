@@ -384,6 +384,14 @@ forEach<number>([1, 2, 3], (item) => {});
 
 - 제네릭 개념을 사용하여 forEach 함수를 만듦
 
+## 기타
+
+```TS
+cardEl.querySelector(".card-cost") as HTMLDivElement
+```
+
+- querySelector를 사용하면 보통 위와같이 형변환을 해준다.
+
 ## 참고 주소
 
 - [TS Compiler Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html#compiler-options)
@@ -396,17 +404,6 @@ forEach<number>([1, 2, 3], (item) => {});
 - [ts-react](https://github.com/ZeroCho/ts-react)
 - [ts-nodebird](https://github.com/ZeroCho/ts-nodebird)
 
-## 공부 계획
-
-- learn-ts (webgame, react, nodebird)
-- learn-react (nodebird, slack)
-- learn-vue (nodebird)
-
-  - 세세한 내용을 readme에 작성
-  - 코드에 상세 주석
-
-- 기억력에 한계 때문에, 계속해서 복습 해야할 것 같다.
-
 ## 강좌
 
-- 타입스크립트 강좌 4-5
+- 타입스크립트 강좌 4-5 23:25 - 06:00
