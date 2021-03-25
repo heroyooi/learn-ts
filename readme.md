@@ -384,6 +384,42 @@ forEach<number>([1, 2, 3], (item) => {});
 
 - 제네릭 개념을 사용하여 forEach 함수를 만듦
 
+## 타입 가드
+
+```TS
+interface Card {
+  att: number;
+  hp: number;
+  mine: boolean;
+  cost?: number;
+  field?: boolean;
+  hero?: boolean;
+}
+
+class Sub implements Card {
+  public att: number;
+  public hp: number;
+  public field: boolean = false;
+  public cost: number;
+  public mine: boolean;
+  constructor(mine: boolean) {
+    this.mine = mine;
+    this.att = Math.ceil(Math.random() * 5);
+    this.hp = Math.ceil(Math.random() * 5);
+    this.cost = Math.floor((this.att + this.hp) / 2);
+  }
+}
+
+const isSub = function (data: Card): data is Sub {
+  if (data.cost) {
+    return true;
+  }
+  return false;
+};
+```
+
+- 넓은 타입(Card)을 좁은 타입(Sub)로 좁혀줄 수 있다.
+
 ## 기타
 
 ```TS
@@ -406,4 +442,4 @@ cardEl.querySelector(".card-cost") as HTMLDivElement
 
 ## 강좌
 
-- 타입스크립트 강좌 4-5 23:25 - 06:00
+- 타입스크립트 강좌 4-7
