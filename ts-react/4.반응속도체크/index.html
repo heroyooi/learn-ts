@@ -4,18 +4,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>로또추첨기</title>
+    <title>반응속도체크</title>
     <style>
-      .ball {
-        display: inline-block;
-        border: 1px solid black;
-        border-radius: 20px;
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-        font-size: 20px;
+      #screen {
+        width: 300px;
+        height: 200px;
         text-align: center;
-        margin-right: 20px;
+        user-select: none;
+      }
+      #screen.waiting {
+        background-color: aqua;
+      }
+      #screen.ready {
+        background-color: red;
+        color: white;
+      }
+      #screen.now {
+        background-color: greenyellow;
       }
     </style>
   </head>

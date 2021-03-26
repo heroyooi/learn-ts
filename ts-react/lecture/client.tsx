@@ -1,9 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { hot } from "react-hot-loader/root";
 
-import ResponseCheck from "./ResponseCheck";
+import Lotto from "./Lotto";
 
-const Hot = hot(ResponseCheck); // HOC
-
-ReactDOM.render(<Hot />, document.querySelector("#root"));
+ReactDOM.render(<Lotto />, document.querySelector("#root"));
