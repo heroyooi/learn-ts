@@ -20,6 +20,8 @@ npx webpack
 npm i react-hot-loader
 ```
 
+- 제네릭은 타입이 제대로 안잡혔을 때 그 타입을 제대로 잡아주는 역할(수동으로)
+
 ## 참고
 
 [DefinitelyTyped | React](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts)
