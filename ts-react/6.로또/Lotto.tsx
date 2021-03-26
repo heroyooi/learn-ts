@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useRef, useEffect, useMemo, useCallback } from "react";
+import Ball from "./Ball";
 
 function getWinNumbers() {
   const candidate = Array(45)
@@ -25,15 +26,15 @@ const Lotto = () => {
   const timeouts = useRef<number[]>([]);
 
   useEffect(() => {
-    console.log("useEffect");
     for (let i = 0; i < winNumbers.length - 1; i++) {
-      timeouts.current[i] = setTimeout(() => {
+      timeouts.current[i] = window.setTimeout(() => {
         setWinBalls((prevBalls) => [...prevBalls, winNumbers[i]]);
       }, (i + 1) * 1000);
     }
-    timeouts.current[6] = setTimeout(() => {
+    timeouts.current[6] = window.setTimeout(() => {
       setBonus(winNumbers[6]);
       setRedo(true);
+      ``;
     }, 7000);
     return () => {
       timeouts.current.forEach((v) => {
@@ -48,8 +49,6 @@ const Lotto = () => {
   }, [winNumbers]);
 
   const onClickRedo = useCallback(() => {
-    console.log("onClickRedo");
-    console.log(winNumbers);
     setWinNumbers(getWinNumbers());
     setWinBalls([]);
     setBonus(null);
@@ -66,7 +65,7 @@ const Lotto = () => {
         ))}
       </div>
       <div>보너스!</div>
-      {bonus && <Ball number={bonus} onClick={onClickRedo} />}
+      {bonus && <Ball number={bonus} />}
       {redo && <button onClick={onClickRedo}>한 번 더!</button>}
     </>
   );
