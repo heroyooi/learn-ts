@@ -62,4 +62,4 @@ type imgCoords = typeof rspCoords[keyof typeof rspCoords];
 
 ## 강좌
 
-4-3
+5-3 | 16:23 - 12:31
